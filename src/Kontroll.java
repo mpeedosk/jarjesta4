@@ -9,7 +9,7 @@ public class Kontroll {
 		this.r = r;
 		this.v = v;
 		this.tabel = new String[r][v];
-		uusMäng();
+		uusMÃ¤ng();
 	}
 	public String[][] getTabel() {
 		return tabel;
@@ -23,21 +23,21 @@ public class Kontroll {
 	}
 	int xcount = 0;
 	int ocount = 0;
-	static int järjest  = 4;
+	static int jÃ¤rjest  = 4;
 	
-	void uusMäng(){
-		for(int i = 0; i<r; i++) 									// käime mõlemad listid läbi
+	void uusMÃ¤ng(){
+		for(int i = 0; i<r; i++) 									// kÃ¤ime mÃµlemad listid lÃ¤bi
 			for(int j = 0; j<v; j++)
 				tabel[i][j] = "_";
 	}
 	
-	String kontroll(){ 							// meetod kõikide võimaluste kontrolliks
+	String kontroll(){ 							// meetod kÃµikide vÃµimaluste kontrolliks
 		String pv = paremVasak(); 
-		if(!pv.equals(""))								// kui kusagil on võit tuvastatud, pole edasi mõtet vaadata
+		if(!pv.equals(""))								// kui kusagil on vÃµit tuvastatud, pole edasi mÃµtet vaadata
 			return pv;
-		String üa = ülesAlla();
-		if(!üa.equals(""))
-			return üa;
+		String Ã¼a = Ã¼lesAlla();
+		if(!Ã¼a.equals(""))
+			return Ã¼a;
 		String dvp = diagonaalVP();
 		if(!dvp.equals(""))
 			return dvp;
@@ -47,12 +47,12 @@ public class Kontroll {
 		String viik = viik();
 		if(!viik.equals(""))
 			return viik;
-		return "";										// kui ükski juhtum pole täidetud tagastab tühisõne
+		return "";										// kui Ã¼kski juhtum pole tÃ¤idetud tagastab tÃ¼hisÃµne
 		
 		
 	}
-	private String paremVasak(){							// vaatame palju horisontaalselt järjest on
-														// esimene tsükkel muudab rida, teine veergu
+	private String paremVasak(){							// vaatame palju horisontaalselt jÃ¤rjest on
+														// esimene tsÃ¼kkel muudab rida, teine veergu
 		for(int i = 0; i<r; i++){												// vaatame rida
 			xcount = ocount = 0; // uue rea korral nullime loendurid
 			for(int j =0; j<v-1; j++){ 											// vaatame rea elementi
@@ -63,17 +63,17 @@ public class Kontroll {
 				else
 					xcount=ocount= 0;
 				
-																				// igal sammul vaatame, kas vajaminev arv on täis
-				if(xcount>=järjest-1) 
-					return "X võitis";
-				else if (ocount>=järjest-1)
-					return "O võitis";
+																				// igal sammul vaatame, kas vajaminev arv on tÃ¤is
+				if(xcount>=jÃ¤rjest-1) 
+					return "X vÃµitis";
+				else if (ocount>=jÃ¤rjest-1)
+					return "O vÃµitis";
 				}
 			}
 		return "";
 	}
-	private String ülesAlla(){
-																		// esimene tsükkel muudab veergu, teine tsükkel rida
+	private String Ã¼lesAlla(){
+																		// esimene tsÃ¼kkel muudab veergu, teine tsÃ¼kkel rida
 		for(int i = 0; i<v; i++){ 												// vaatame rida
 			xcount = ocount = 0; 
 			for(int j =0; j<r-1; j++){ 											// vaatame rea elementi
@@ -84,21 +84,21 @@ public class Kontroll {
 				else
 					xcount = ocount = 0;
 				
-				if(xcount>=järjest-1)
-					return "X võitis";
-				else if (ocount>=järjest-1)
-					return "O võitis";
+				if(xcount>=jÃ¤rjest-1)
+					return "X vÃµitis";
+				else if (ocount>=jÃ¤rjest-1)
+					return "O vÃµitis";
 			}
 
 		}
 		return "";
 	}
-	private String diagonaalVP(){									//kontrollib ülevalt vasakult alla paremale poole
+	private String diagonaalVP(){									//kontrollib Ã¼levalt vasakult alla paremale poole
 																	// vaatab elemente peadiagonaalil ja allpool seda
-																			// esimene tsükkel on seotud ridadega, teine tsükkelö seotud veergudega
+																			// esimene tsÃ¼kkel on seotud ridadega, teine tsÃ¼kkelÃ¶ seotud veergudega
 		for(int i = 0; i <Math.min(r,v)-1; i++){ 
 			xcount = ocount = 0;											 // iga kord kui loendamist alustame uuelt realt, nullime eelmised tulemused
-			for(int j=0; j<Math.min(r,v)-i-1;j++ ){							 //j<Math.min(r,v)-i-1 sest iga tsükkel tuleb vähem elemente läbi vaadata ning see oleneb muutujast i
+			for(int j=0; j<Math.min(r,v)-i-1;j++ ){							 //j<Math.min(r,v)-i-1 sest iga tsÃ¼kkel tuleb vÃ¤hem elemente lÃ¤bi vaadata ning see oleneb muutujast i
 				if(tabel[i+j][j].equals("x")&&tabel[i+1+j][j+1].equals("x")) //
 					xcount++;
 				else if (tabel[i+j][j].equals("o")&&tabel[i+1+j][j+1].equals("o"))
@@ -106,54 +106,54 @@ public class Kontroll {
 				else 
 					xcount = ocount=0;
 				
-				if(xcount>=järjest-1)
-					return "X võitis";
-				else if (ocount>=järjest-1)
-					return "O võitis";
+				if(xcount>=jÃ¤rjest-1)
+					return "X vÃµitis";
+				else if (ocount>=jÃ¤rjest-1)
+					return "O vÃµitis";
 			}
 
 		}
-																				// vaatab elemente ülevalpool peadiagonaali
+																				// vaatab elemente Ã¼levalpool peadiagonaali
 		for(int i = 1; i < Math.min(r, v)-1; i++){
 			xcount = ocount = 0;
 			for(int j=0; j<Math.min(r, v)-1;j++ ){
 				if(j+i+1<Math.max(r, v)){
-				if(tabel[j][j+i].equals("x")&&tabel[j+1][j+1+i].equals("x")) 	// sama mis eelmine, ainult et tabeli ja veeru muutujad ([i+j][j]) on ära vahetatud 
+				if(tabel[j][j+i].equals("x")&&tabel[j+1][j+1+i].equals("x")) 	// sama mis eelmine, ainult et tabeli ja veeru muutujad ([i+j][j]) on Ã¤ra vahetatud 
 					xcount++;
 				else if (tabel[j][j+i].equals("o")&&tabel[j+1][j+1+i].equals("o"))
 					ocount++;
 				else 
 					xcount = ocount=0;
 				
-				if(xcount>=järjest-1)
-					return "X võitis";
-				else if (ocount>=järjest-1)
-					return "O võitis";
+				if(xcount>=jÃ¤rjest-1)
+					return "X vÃµitis";
+				else if (ocount>=jÃ¤rjest-1)
+					return "O vÃµitis";
 				}
 			}
 
 		}
 		return "";
 	}
-	private String diagonaalPV(){ 										//kontrollib ülevalt vasakult alla paremale poole
-																		// vaatab elemente peadiagonaalil ja allpool seda															// esimest tsükklit on vaja ridade jaoks, teist veergude jaoks
+	private String diagonaalPV(){ 										//kontrollib Ã¼levalt vasakult alla paremale poole
+																		// vaatab elemente peadiagonaalil ja allpool seda															// esimest tsÃ¼kklit on vaja ridade jaoks, teist veergude jaoks
 		for(int i = 0; i <Math.min(r,v)-1; i++){ 
 			xcount = ocount = 0; 												// iga kord kui loendamist alustame uuelt realt, nullime eelmised tulemused
-			for(int j=v-1,k=i; j>0+i&&k<r-1;j--,k++){ 							//j<Math.min(r,v)-i-1 sest iga tsükkel tuleb vähem elemente läbi vaadata ning see oleneb muutujast i
+			for(int j=v-1,k=i; j>0+i&&k<r-1;j--,k++){ 							//j<Math.min(r,v)-i-1 sest iga tsÃ¼kkel tuleb vÃ¤hem elemente lÃ¤bi vaadata ning see oleneb muutujast i
 				if(tabel[k][j].equals("x")&&tabel[k+1][j-1].equals("x")) //
 					xcount++;
 				else if (tabel[k][j].equals("o")&&tabel[k+1][j-1].equals("o"))
 					ocount++;
 				else 
 					xcount = ocount=0;
-				if(xcount>=järjest-1)
-					return "X võitis";
-				else if (ocount>=järjest-1)
-					return "O võitis";
+				if(xcount>=jÃ¤rjest-1)
+					return "X vÃµitis";
+				else if (ocount>=jÃ¤rjest-1)
+					return "O vÃµitis";
 			}
 
 		}
-		for(int i = 0; i < v-1; i++){ 											// i muutub veergude järgi
+		for(int i = 0; i < v-1; i++){ 											// i muutub veergude jÃ¤rgi
 			xcount = ocount = 0; 												// iga kord kui loendamist alustame uuelt realt, nullime eelmised tulemused
 			for(int j=v-1,k=0; j>0+i&&k<r-1;j--,k++){						    // k on ridade indeks
 				if(tabel[k][j-i].equals("x")&&tabel[k+1][j-i-1].equals("x")) 
@@ -162,10 +162,10 @@ public class Kontroll {
 					ocount++;
 				else 
 					xcount = ocount=0;
-				if(xcount>=järjest-1)
-					return "X võitis";
-				else if (ocount>=järjest-1)
-					return "O võitis";
+				if(xcount>=jÃ¤rjest-1)
+					return "X vÃµitis";
+				else if (ocount>=jÃ¤rjest-1)
+					return "O vÃµitis";
 			}
 
 		}
@@ -173,15 +173,15 @@ public class Kontroll {
 
 	}	
 	private String viik(){			// viigi kontrollimine
-		int tühicount = 0;			// kui palju kohti veel tühi on
+		int tÃ¼hicount = 0;			// kui palju kohti veel tÃ¼hi on
 		for(String[] rida: tabel){ 	
 			for(String elem: rida){
 				if(elem.equals("_"))
-					tühicount++; 	// kui leiame tühja koha siis suurename loendurit
+					tÃ¼hicount++; 	// kui leiame tÃ¼hja koha siis suurename loendurit
 			}
 		}
-		if(tühicount==0)
-			return "Viik"; 			// kui ühtegi tühja kohta pole tagastame viig
+		if(tÃ¼hicount==0)
+			return "Viik"; 			// kui Ã¼htegi tÃ¼hja kohta pole tagastame viig
 		else
 			return "";
 	}
