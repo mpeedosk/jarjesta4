@@ -1,4 +1,4 @@
-## Järjesta neli (2015)
+## Järjesta neli (2015 kevad)
 
 Objektorienteeritud programmeerimine kursuse jaoks tehtud mäng "Järjesta neli"
 ![](https://raw.githubusercontent.com/mpeedosk/jarjesta4/master/screens/2.png)<br/>
