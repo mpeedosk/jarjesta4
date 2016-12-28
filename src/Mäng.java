@@ -41,7 +41,10 @@ public class Mäng extends Application {
 
     //muutujad
 
-    private Kontroll kontroll = new Kontroll(6, 7);                // kontroll isendi loomine võidu kontrollimiseks
+    private final int RIDA = 5;
+    private final int VEERG = 7;
+
+    private Kontroll kontroll = new Kontroll(RIDA, VEERG);                // kontroll isendi loomine võidu kontrollimiseks
     private Minimax ai = new Minimax();
     private String seis = "";                                    // mängualgseis "" - võitjat pole, "X võitis" - esimese mängija võit, "O võitis" - teise mängija võit, "-" võit oli juba ära aga mängitakse edasi
     private String võitja = "";                                    // mängu võitnud mängija värv
@@ -643,7 +646,7 @@ public class Mäng extends Application {
 
         if(kord.getVärv().get() == m2_värv){
             int[] käik = ai.calculateMove(kontroll.getTabel());
-            System.out.println("" + käik[0] + ", " + käik[1]);
+            System.out.println("Käik: " + käik[0] + ", " + käik[1]);
 
             StackPane nodeByIndex = getNodeByIndex(käik[0], käik[1], grid);
             MouseEvent event = new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, MouseButton.PRIMARY,
@@ -710,8 +713,8 @@ public class Mäng extends Application {
     // meetod mängu ruudustiku seadmiseks pärast laadimist
     private void laadiRuudustik(GridPane grid, String[][] tabel) {
         kuvaRuudustik(grid);                                                                        // alustamine algväärtustest
-        for (int r = 0; r < 5; r++) {                                                                        // käime terve tabeli läbi
-            for (int v = 0; v < 7; v++) {
+        for (int r = 0; r < RIDA; r++) {                                                                        // käime terve tabeli läbi
+            for (int v = 0; v < VEERG; v++) {
                 if (!tabel[r][v].equals("_")) {                                                        // kui tabelis on mingi koha peal x või o, siis lähme edasi
                     for (Node n : getNodeByIndex(r, v, grid).getChildren()) {                            // otsime StackPane asukoha pealt, mis võrdub tabeli rea ning veeru indeksiga
                         Circle R = (Circle) (n);                                                        // StackPane koosneb kahest ringist
@@ -737,8 +740,8 @@ public class Mäng extends Application {
     // ruudustiku kuvamine
     private void kuvaRuudustik(GridPane grid) {
         grid.getChildren().clear();
-        for (int r = 0; r < 5; r++) {                                    // r - ridade arv
-            for (int v = 0; v < 7; v++) {                                // v - veergude arv
+        for (int r = 0; r < RIDA; r++) {                                    // r - ridade arv
+            for (int v = 0; v < VEERG; v++) {                                // v - veergude arv
 
                 // meile on oluline lisamise järjekord ning kumb eespool on
                 StackPane stack = new StackPane();                // siia paneme eelvaateringi ning tavalise ringi
