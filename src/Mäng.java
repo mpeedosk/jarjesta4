@@ -266,7 +266,9 @@ public class Mäng extends Application {
 
                     Label label = new Label("Järjesta neli! \n\n" + "Võidab see, kes saab neli enda\n" + "nuppu järjest, kas vertikaalselt,\n"
                             + "horisontaalselt või diagonaalselt.\n\n" + "Võimalikke järgmisi käike \nnäitab heledam ring.\n\n");
+                    label.setTextFill(Color.web("#EEE8AA"));
                     Button selge = new Button("Selge");
+                    selge.getStylesheets().add("stiil.css");
                     // nupu stiili muutmine
 
                     selge.setOnAction(new EventHandler<ActionEvent>() {
@@ -288,9 +290,10 @@ public class Mäng extends Application {
                     VBox vBox = new VBox();
 
                     vBox.setSpacing(5);                        // väiksed vahed teksti ja nuppude vahel
-                    vBox.setPrefWidth(200);                    // eelistatud laius
-                    vBox.setPrefHeight(220);                    // eelistatud kõrgus
+                    vBox.setPrefWidth(300);                    // eelistatud laius
+                    vBox.setPrefHeight(200);                    // eelistatud kõrgus
                     vBox.setAlignment(Pos.CENTER);            // positsioon keskel
+                    vBox.setStyle("-fx-background-color: #7D5D3B");
                     vBox.getChildren().addAll(label, selge);
 
                     //stseeni loomine ja näitamine
@@ -326,7 +329,9 @@ public class Mäng extends Application {
 
                 Label label = new Label("Järjesta neli! \n\n" + "Võidab see, kes saab neli enda\n" + "nuppu järjest, kas vertikaalselt,\n"
                         + "horisontaalselt või diagonaalselt.\n\n" + "Võimalikke järgmisi käike \nnäitab heledam ring.\n\n");
+                label.setTextFill(Color.web("#EEE8AA"));
                 Button selge = new Button("Selge");
+                selge.getStylesheets().add("stiil.css");
                 // nupu stiili muutmine
 
                 selge.setOnAction(new EventHandler<ActionEvent>() {
@@ -348,10 +353,11 @@ public class Mäng extends Application {
                 VBox vBox = new VBox();
 
                 vBox.setSpacing(5);                        // väiksed vahed teksti ja nuppude vahel
-                vBox.setPrefWidth(200);                    // eelistatud laius
-                vBox.setPrefHeight(220);                    // eelistatud kõrgus
+                vBox.setPrefWidth(300);                    // eelistatud laius
+                vBox.setPrefHeight(200);                    // eelistatud kõrgus
                 vBox.setAlignment(Pos.CENTER);            // positsioon keskel
                 vBox.getChildren().addAll(label, selge);
+                vBox.setStyle("-fx-background-color: #7D5D3B");
 
                 //stseeni loomine ja näitamine
                 Scene stseen2 = new Scene(vBox);
@@ -375,8 +381,12 @@ public class Mäng extends Application {
 
                     // küsimuse ja kahe nupu loomine
                     Label label = new Label("Kas tõesti tahad kinni panna?");
+                    label.setTextFill(Color.web("#EEE8AA"));
                     Button okButton = new Button("Jah");
+                    okButton.getStylesheets().add("stiil.css");
+
                     Button cancelButton = new Button("Ei");
+                    cancelButton.getStylesheets().add("stiil.css");
 
                     // sündmuste lisamine
                     okButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -427,6 +437,8 @@ public class Mäng extends Application {
                     VBox vBox = new VBox(10);
                     vBox.setAlignment(Pos.CENTER);
                     vBox.getChildren().addAll(label, pane);
+                    vBox.setPrefHeight(85);                    // eelistatud kõrgus
+                    vBox.setStyle("-fx-background-color: #7D5D3B");
 
                     //stseeni loomine ja kuvamine
                     Scene stseen2 = new Scene(vBox);
@@ -448,8 +460,12 @@ public class Mäng extends Application {
 
                 // küsimuse ja kahe nupu loomine
                 Label label = new Label("Kas tõesti tahad kinni panna?");
+                label.setTextFill(Color.web("#EEE8AA"));
                 Button okButton = new Button("Jah");
+                okButton.getStylesheets().add("stiil.css");
+
                 Button cancelButton = new Button("Ei");
+                cancelButton.getStylesheets().add("stiil.css");
 
                 // sündmuste lisamine
                 okButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -500,6 +516,8 @@ public class Mäng extends Application {
                 VBox vBox = new VBox(10);
                 vBox.setAlignment(Pos.CENTER);
                 vBox.getChildren().addAll(label, pane);
+                vBox.setPrefHeight(85);                    // eelistatud kõrgus
+                vBox.setStyle("-fx-background-color: #7D5D3B");
 
                 //stseeni loomine ja kuvamine
                 Scene stseen2 = new Scene(vBox);
@@ -571,9 +589,15 @@ public class Mäng extends Application {
             // küsimuse ja kahe nupu loomine
 
             Label label = new Label(võitja + " võitis!");
+            if (võitja.equals("Kollane"))
+                label.setTextFill(Color.web("FFFF00"));
+            else
+                label.setTextFill(Color.web("#FF0000"));
+
             Button võit = new Button("Okei");
+
             // nupu stiili muutmine
-            võit.setStyle("-fx-text-fill: green;");
+            võit.getStylesheets().add("stiil.css");
 
             võit.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event) {
@@ -591,13 +615,10 @@ public class Mäng extends Application {
             // küsimuse ja nuppude gruppi paigutamine
             VBox vBox = new VBox();
 
-            // tausta värv
-            if (võitja.equals("Kollane"))
-                vBox.setStyle("-fx-background-color: FFFF99;");
-            else
-                vBox.setStyle("-fx-background-color: FF6666;");
+            vBox.setStyle("-fx-background-color: #7D5D3B");
+
             vBox.setSpacing(5);                        // väiksed vahed teksti ja nuppude vahel
-            vBox.setPrefWidth(170);                    // eelistatud laius
+            vBox.setPrefWidth(200);                    // eelistatud laius
             vBox.setPrefHeight(70);                    // eelistatud kõrgus
             vBox.setAlignment(Pos.CENTER);            // positsioon keskel
             vBox.getChildren().addAll(label, võit);
@@ -615,8 +636,9 @@ public class Mäng extends Application {
             kiri.initOwner(juur.getScene().getWindow());
 
             Label label = new Label("Mäng lõppes viigiga!");
+            label.setTextFill(Color.web("#EEE8AA"));
             Button võit = new Button("Okei");
-            võit.setStyle("-fx-text-fill: green;");
+            võit.getStylesheets().add("stiil.css");
 
             võit.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event) {
@@ -632,8 +654,9 @@ public class Mäng extends Application {
             });
 
             VBox vBox = new VBox();
+            vBox.setStyle("-fx-background-color: #7D5D3B");
             vBox.setSpacing(5);
-            vBox.setPrefWidth(170);
+            vBox.setPrefWidth(200);
             vBox.setPrefHeight(70);
             vBox.setAlignment(Pos.CENTER);
             vBox.getChildren().addAll(label, võit);
