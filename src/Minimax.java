@@ -1,6 +1,3 @@
-import javafx.scene.input.MouseEvent;
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -19,10 +16,14 @@ public class Minimax {
     private final int WRST_CASE = 1;
     private final int LOSE = 0;
 
+    /**
+     * @param tabel - mänguseis
+     * @return int[] - koordinaadid - rida ja veerg
+     */
     public int[] calculateMove(String[][] tabel) {
 
 
-        char[][] charTabel = copyGrid(tabel);
+        char[][] charTabel = copyBoard(tabel);
 
         int[] move = minimax('x', charTabel);
 
@@ -37,6 +38,11 @@ public class Minimax {
         return move;
     }
 
+    /** Tagastab kõik reeglikohased käigud
+     *
+     * @param tabel - mänguseis
+     * @return  koordinaadid
+     */
     private ArrayList<int[]> getLegalMoves(char[][] tabel) {
         ArrayList<int[]> moves = new ArrayList<>();
         for (int i = 4; i >= 0; i--) {
@@ -48,8 +54,13 @@ public class Minimax {
         return moves;
     }
 
-    //Function to copy grid.
-    private char[][] copyGrid(String[][] tabel) {
+    /** Teeme Stringi maatriksi char maatriksiks
+     *
+     * @param tabel - mänguseis
+     * @return  char maatriks
+     */
+
+    private char[][] copyBoard(String[][] tabel) {
         char[][] uusTabel = new char[5][7];
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 7; col++) {
@@ -58,6 +69,12 @@ public class Minimax {
         }
         return uusTabel;
     }
+
+    /** Teeme iga maatriksi rea sõneks, et saaks otsida selles mustrit
+     *
+     * @param tabel - mänguseis
+     * @return  String mänguseis
+     */
 
     private String rowsToString(char[][] tabel) {
         StringBuilder sb = new StringBuilder();
@@ -71,6 +88,11 @@ public class Minimax {
         return sb.toString();
     }
 
+    /** Teeme iga maatriksi veeru sõneks, et saaks otsida selles mustrit
+     *
+     * @param tabel - mänguseis
+     * @return  String mänguseis
+     */
     private String colsToString(char[][] tabel) {
         StringBuilder sb = new StringBuilder();
 
@@ -83,8 +105,14 @@ public class Minimax {
         return sb.toString();
     }
 
+    /** Teeme maatriksi diagonaalid (mis on pikemad kui 3) sõneks, et saaks otsida selles mustrit
+     *
+     * @param tabel - mänguseis
+     * @return  String mänguseis
+     */
     private String diag1ToString(char[][] tabel) {
         StringBuilder sb = new StringBuilder();
+        // täispikad diagonaalid
         for (int col = 0; col < 3; col++) {
             for (int i = 0; i < 5 ; i++) {
                 sb.append(tabel[i][col + i]);
@@ -92,12 +120,18 @@ public class Minimax {
             sb.append("\n");
         }
 
+        // diagonaalid, mis on ühe võrra väiksemad
         sb.append(tabel[1][0]).append(tabel[2][1]).append(tabel[3][2]).append(tabel[4][3]).append("\n");
         sb.append(tabel[0][3]).append(tabel[1][4]).append(tabel[2][5]).append(tabel[3][6]).append("\n");
 
         return sb.toString();
     }
 
+    /** Teeme maatriksi diagonaalid (mis on pikemad kui 3) sõneks, et saaks otsida selles mustrit
+     *
+     * @param tabel - mänguseis
+     * @return  String mänguseis
+     */
     private String diag2ToString(char[][] tabel) {
         StringBuilder sb = new StringBuilder();
         for (int col = 0; col < 3; col++) {
@@ -112,14 +146,22 @@ public class Minimax {
         return sb.toString();
     }
 
+
+    /** Anname mänguseisule hinnangu
+     *
+     * @param tabel - mänguseis
+     * @param player - mängija tähis 'x' või 'o'
+     * @return  int - hinnang arvuna, mida suurem seda parem
+     */
+
     private int eval(char player, char[][] tabel) {
+        // liidame kõik erinevad järjestamise viisid kokku
         String allPossibleWINs = rowsToString(tabel) +
                 colsToString(tabel) +
                 diag1ToString(tabel) +
                 diag2ToString(tabel);
 
-        int current_case = MEHH_CASE;
-        
+        // alustame kõige paremast/halvemast ja tagastame kohe kui leiame
         if (allPossibleWINs.contains("oooo"))
             return player == 'x' ? LOSE : WIN;
         if (allPossibleWINs.contains("xxxx"))
@@ -148,9 +190,16 @@ public class Minimax {
                 || allPossibleWINs.contains("_x_x") || allPossibleWINs.contains("x_x_"))
             return player == 'x' ? GOOD_CASE : BADD_CASE;
 
-        return current_case;
+        return MEHH_CASE;
     }
 
+
+    /** Kõik erinevad käigud
+     *
+     * @param tabel - mänguseis
+     * @param player - mängija tähis 'x' või 'o'
+     * @return kõik koordinaadid, kuhu saaks käia
+     */
     private ArrayList<Move> compilePossibilites(char player, char[][] tabel) {
 
         HashMap<Integer, ArrayList<int[]>> possibilities = new HashMap<>();
@@ -169,12 +218,11 @@ public class Minimax {
         }
 
         ArrayList<int[]> legalMoves = getLegalMoves(tabel);
-
         ArrayList<Move> possibilityList = new ArrayList<>();
-        int size = 0;
+
+        // filtreerime millised käigud lubatud on
         for (int i = WIN; i >= LOSE; i--) {
             for (int[] ints : possibilities.get(i)) {
-                size++;
                 if (containsCoord(legalMoves, ints))
                     possibilityList.add(new Move(i, ints));
             }
@@ -183,6 +231,12 @@ public class Minimax {
 
     }
 
+    /** Vaatame, kas etteantud koordinaatide listis leidub selline koordinaat
+     *
+     * @param list - koordinaatide list
+     * @param arr - koordinaat
+     * @return  Boolean
+     */
     private boolean containsCoord(List<int[]> list, int[] arr) {
         for (int[] item : list) {
             if (Arrays.equals(item, arr))
@@ -191,12 +245,12 @@ public class Minimax {
         return false;
     }
 
-    private void printMoves(ArrayList<int[]> moves) {
-        for (int[] move : moves) {
-            System.out.println(move[0] + ", " + move[1]);
-        }
-        System.out.println("----");
-    }
+    /** Minimax algoritm
+     *
+     * @param player - mängija tähis
+     * @param tabel - mänguseis
+     * @return  koordinaat
+     */
 
     private int[] minimax(char player, char[][] tabel) {
         int[] move = {-1, -1};
@@ -209,26 +263,23 @@ public class Minimax {
             if (temp.size() > 0)
                 op_move = temp.get(0);
             else {
-                System.out.println("WWWWWWWWWW");
                 op_move = new Move(WIN, coord);
             }
-
             tabel[coord[0]][coord[1]] = '_';
 
             if (op_value > op_move.value || move[0] == -1) {
                 move = coord;
                 op_value = op_move.value;
             }
-
         }
-        System.out.println(op_value);
-
-
         return move;
     }
 }
 
-
+/**
+ * Teeme uue klassi käigu tähistamiseks
+ * vaja on hoida käigu hinnangut meeles
+ */
 class Move {
     int[] move;
     int value;

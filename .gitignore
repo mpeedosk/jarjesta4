@@ -9,7 +9,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
@@ -20,9 +19,10 @@ hs_err_pid*
 
 # IntelliJ project files
 .idea
-.bin/*
+bin/
 .classpath
 .project
 *.iml
 out
 gen
+*.dat
